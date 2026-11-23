@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>بوابة كلية الزراعة — الفرقة الأولى | تلخيص محاضرات</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- خلفية DNA ثلاثية الأبعاد تتحرك مع السكرول وتميل بخفة مع الماوس -->
+  <canvas id="dnaCanvas" class="dna-bg" aria-hidden="true"></canvas>
+
+  <!-- الشريط العلوي (أزرق) -->
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">
+          <img src="logo.png" alt="شعار كلية الزراعة جامعة سوهاج" class="faculty-logo" />
+        </div>
+        <div>
+          <span class="brand-name">كلية الزراعة — جامعة سوهاج</span>
+          <small class="brand-tag">بوابة تلخيص محاضرات</small>
+        </div>
+      </div>
+
+      <div class="search-box">
+        <input id="searchInput" type="search" placeholder="ابحث عن مادة أو محاضرة..." />
+      </div>
+
+      <button
+        id="drawerToggle"
+        class="drawer-btn"
+        type="button"
+        aria-expanded="false"
+        aria-controls="topDrawer"
+      >
+        <span class="hamburger" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+        <span id="drawerBtnText">قائمة المواد</span>
+      </button>
+    </div>
+
+    <!-- خط تقدم السكرول أسفل الهيدر -->
+    <div class="scroll-track" aria-hidden="true">
+      <div id="scrollProgress" class="scroll-progress"></div>
+    </div>
+
+    <!-- القائمة العلوية المنسدلة الخاصة بالمواد (الفرقة الأولى) -->
+    <div id="topDrawer" class="top-drawer" aria-hidden="true">
+      <div class="container drawer-inner">
+        <div class="drawer-group" style="--delay: 0.05s">
+          <span class="drawer-label">مواد الفرقة الأولى</span>
+          <div id="subjectsChips" class="chips-row"></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- طبقة تعتيم وضبابية خلف القائمة لما تفتح -->
+  <div id="drawerBackdrop" class="drawer-backdrop"></div>
+
+  <!-- المحتوى الأساسي (أزرق داكن) -->
+  <main class="container content">
+    <section class="hero-strip spotlight-card">
+      <div>
+        <h1>ملخصات محاضرات الفرقة الأولى</h1>
+        <p>اختر المادة من قائمة المواد بالأعلى أو ابحث مباشرة عن المحاضرة المطلوبة.</p>
+      </div>
+      <div class="hero-badges">
+        <span class="pill">الفرقة الأولى</span>
+        <span class="pill pill-outline" id="activeSubjectLabel">جميع المواد</span>
+      </div>
+    </section>
+
+    <section class="cards-grid" id="cardsContainer" aria-label="بطاقات المواد والمحاضرات"></section>
+  </main>
+
+  <!-- نافذة عرض المحاضرات وقراءة الملخص -->
+  <div id="lectureModal" class="modal-backdrop" hidden>
+    <div class="modal spotlight-card" role="dialog" aria-modal="true" aria-labelledby="modalSubjectTitle">
+      <div class="modal-header">
+        <div>
+          <span class="pill pill-outline">الفرقة الأولى</span>
+          <h2 id="modalSubjectTitle"></h2>
+        </div>
+        <button id="closeModalBtn" class="icon-close" type="button" aria-label="إغلاق">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <div id="lecturesList" class="lectures-list"></div>
+
+        <article id="lectureViewer" class="lecture-viewer" hidden>
+          <div class="viewer-bar">
+            <button id="backToLecturesBtn" class="btn-secondary" type="button">→ قائمة محاضرات المادة</button>
+            <button id="printLectureBtn" class="btn-primary" type="button">طباعة / حفظ PDF</button>
+          </div>
+
+          <!-- مربع واحد موحد يجمع الصور والبيانات معاً -->
+          <div class="unified-card spotlight-card">
+            <h3 id="viewerTitle"></h3>
+            <div class="unified-grid">
+              <div id="viewerDiagramBox" class="unified-diagram"></div>
+              <div id="viewerNotes" class="unified-data"></div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span>كلية الزراعة — جامعة سوهاج | الفرقة الأولى</span>
+      <span>جميع الحقوق محفوظة © ARYAN</span>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
